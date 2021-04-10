@@ -8,7 +8,7 @@ const baseUrl = 'http://dataservice.accuweather.com';
 const api = {
 
     async getLocations(location: string, callback: (response: AccuweatherLocation[]) => any) {
-        const res = await fetch(`${baseUrl}/locations/v1/search?apikey=${config.accuWeather.apiKey}&q=${location}`);
+        const res = await fetch(`${baseUrl}/locations/v1/cities/autocomplete?apikey=${config.accuWeather.apiKey}&q=${location}`);
         const results = await res.json();
         callback(results);
     },

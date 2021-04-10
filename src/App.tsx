@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
-import { LocationSearch } from './features/location-search/LocationSearch';
-import { Weather } from './features/weather/Weather';
+import { LocationSearch } from './components/LocationSearch';
+import { Topnav } from './components/Topnav';
+import { Weather } from './components/Weather';
 
 function App() {
   return (
-    <div className="App">
+    <div>
+        <Topnav title="Weather" />
         <LocationSearch />
         <Weather />
     </div>

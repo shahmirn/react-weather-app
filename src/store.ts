@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import locationSearchReducer from '../features/location-search/locationSlice';
-import weatherReducer from '../features/weather/weatherSlice';
+import locationSearchReducer from './slices/locationSlice';
+import weatherReducer from './slices/weatherSlice';
 
 export const store = configureStore({
   reducer: {

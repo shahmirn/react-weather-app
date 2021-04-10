@@ -1,12 +1,12 @@
 const dev = {
     accuWeather: {
-        apiKey: "LYh6wRu7WJlBTnmAa9zEIf5vo7nOIKmA"
+        apiKey: "Wpm6sx2Sk4eWe3oAQPjor3lkl6Wq8JHr"
     }
 };
 
 const prod = {
     accuWeather: {
-        apiKey: "LYh6wRu7WJlBTnmAa9zEIf5vo7nOIKmA"
+        apiKey: "Wpm6sx2Sk4eWe3oAQPjor3lkl6Wq8JHr"
     }
 };
 

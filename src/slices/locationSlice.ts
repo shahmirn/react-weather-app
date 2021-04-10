@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppThunk, RootState } from "../../app/store";
+import { AppThunk, RootState } from "../store";
 
-import accuWeatherService from '../../services/accuweather.service';
+import accuWeatherService from '../services/accuweather.service';
 
-import { AccuweatherLocation } from '../../models/accuweather-location.model';
+import { AccuweatherLocation } from '../models/accuweather-location.model';
 
 interface Location {
     key: string;
@@ -49,13 +49,18 @@ export const locationSlice = createSlice({
 export const { setSearchStart, setSearchResults, setLocationKey } = locationSlice.actions;
 
 export const fetchSearchResults = (search: string): AppThunk => dispatch => {
-    dispatch(setSearchStart());
+    if (search) {
+        dispatch(setSearchStart());
 
-    accuWeatherService.getLocations(search, response => {
-        dispatch(setSearchResults(response));
-    });
+        accuWeatherService.getLocations(search, response => {
+            dispatch(setSearchResults(response));
+        });
+    } else {
+        dispatch(setSearchResults([]));
+    }
 };
 
+export const getLocationSearching = (state: RootState) => state.locationSearch.searching;
 export const getLocationResults = (state: RootState) => state.locationSearch.results;
 export const getLocationKey = (state: RootState) => state.locationSearch.locationKey;
 
