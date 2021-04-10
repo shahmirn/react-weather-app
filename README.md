@@ -1,44 +1,55 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# Weather App - React Frontend - Showcase Project
 
-## Available Scripts
+Project Requirements
 
-In the project directory, you can run:
+Build a React app to display weather information. The UI implementation should prompt for a location, and display the resulting weather.
 
-### `npm start`
+## Working Demo
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+https://react-weather-app-871a0.firebaseapp.com
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Version
+0.0.1
 
-### `npm test`
+## Instructions for usage
+- Navigate to URL
+- Start typing in your city name, and pick a result from the suggestions
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Weather APIs
+- Autocomplete API from https://developer.accuweather.com/accuweather-locations-api/apis
+- Current Conditions API from https://developer.accuweather.com/accuweather-current-conditions-api/apis
+- 1 day forecast from https://developer.accuweather.com/accuweather-forecast-api/apis
 
-### `npm run build`
+## Implementation Caveats
+- The accuweather API only gives suggestions for cities, for example, Houston. Typing in Houston, TX does not return any results
+- The accuweather autocomplete API does not return results for zip codes
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tech
+* [React] - A JavaScript library for building user interfaces
+* [Redux] - A predictable state container for JavaScript apps.
+* [React-Redux] - Official React bindings for Redux
+* [Redux Thunk] - Thunk middleware for Redux.
+* [Material UI] - React components that implement Google's Material Design.
+* [Lodash] - A modern JavaScript utility library delivering modularity, performance & extras.
+* [Typescript] - An open-source language which builds on JavaScript.
+* [Jest] - Delightful JavaScript Testing.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Running locally
+- git clone https://github.com/shahmirn/react-weather-app
+- cd react-weather-app
+- npm install
+- npm run start
+- Go to http://localhost:3000/
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Todo's
+- Add additional unit tests, specifically for the LocationSearch component
+- Better error handling, specifically displaying an error message if we've exceeded the AccuWeather API limit
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+[React]:https://reactjs.org/
+[Redux]:https://redux.js.org/
+[React-Redux]:https://react-redux.js.org/
+[Redux Thunk]:https://github.com/reduxjs/redux-thunk
+[Material UI]:https://material-ui.com/
+[Typescript]:https://www.typescriptlang.org/
+[Lodash]:https://lodash.com/
+[Jest]:https://jestjs.io/
