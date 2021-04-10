@@ -5,7 +5,7 @@ import accuWeatherService from '../services/accuweather.service';
 
 import { AccuweatherLocation } from '../models/accuweather-location.model';
 
-interface Location {
+export interface Location {
     key: string;
     city: string;
     administrativeArea: string; // State, Province, etc
@@ -34,10 +34,10 @@ export const locationSlice = createSlice({
         setSearchResults: (state, action: PayloadAction<AccuweatherLocation[]>) => {
             state.searching = false;
             state.results = action.payload.map(datum => ({
-                key: datum.Key,
-                city: datum.LocalizedName,
-                administrativeArea: datum.AdministrativeArea.LocalizedName,
-                countryID: datum.Country.ID
+                key: datum.key,
+                city: datum.localizedName,
+                administrativeArea: datum.administrativeArea.localizedName,
+                countryID: datum.country.id
             }))
         },
         setLocationKey: (state, action: PayloadAction<string>) => {

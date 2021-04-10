@@ -7,8 +7,15 @@ const baseUrl = 'https://dataservice.accuweather.com';
 
 const api = {
 
-    async getLocations(location: string, callback: (response: AccuweatherLocation[]) => any) {
-        const res = await fetch(`${baseUrl}/locations/v1/cities/autocomplete?apikey=${config.accuWeather.apiKey}&q=${location}`);
+    async getLocations(location: string | number, callback: (response: AccuweatherLocation[]) => any) {
+        let baseUrl;
+        if (!isNaN(location as number) && location.toString().length === 5) {
+            baseUrl = 'https://www.accuweather.com/web-api/zip-autocomplete?language=en-us&query=';
+        } else {
+            baseUrl = 'https://www.accuweather.com/web-api/autocomplete?language=en-us&query=';
+        }
+
+        const res = await fetch(`${baseUrl}${location}`);
         const results = await res.json();
         callback(results);
     },

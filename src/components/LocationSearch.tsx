@@ -1,4 +1,5 @@
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,9 +7,10 @@ import Typography from '@material-ui/core/Typography';
 import debounce from 'lodash/debounce';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLocationResults, fetchSearchResults, setLocationKey, getLocationSearching } from '../slices/locationSlice';
+import { getLocationResults, fetchSearchResults, setLocationKey, getLocationSearching, Location } from '../slices/locationSlice';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
+
 import { fetch1DayForecast, fetchCurrentConditions } from '../slices/weatherSlice';
 
 const useStyles = makeStyles({
@@ -26,7 +28,15 @@ export function LocationSearch() {
     
     const dispatch = useDispatch();
 
+    const [inputValue, setInputValue] = useState('');
     const [open, setOpen] = useState(false);
+
+    const filterOptions = createFilterOptions({
+        matchFrom: 'start',
+        stringify: (_: Location) => {
+            return inputValue;
+        },
+    });
 
     return (
         <Card className={classes.root} data-testid="location-search">
@@ -35,6 +45,7 @@ export function LocationSearch() {
                     Settings
                 </Typography>
                 <Autocomplete
+                    filterOptions={filterOptions}
                     id="find-location"
                     open={open}
                     onOpen={() => {
@@ -51,6 +62,7 @@ export function LocationSearch() {
                         dispatch(fetch1DayForecast(locationKey));
                     }}
                     onInputChange={debounce((event, newInputValue) => {
+                        setInputValue(newInputValue);
                         dispatch(fetchSearchResults(newInputValue));
                     }, 500)}
                     getOptionSelected={(option, value) => option.key === value.key}
