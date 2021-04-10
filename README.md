@@ -21,6 +21,7 @@ https://react-weather-app-871a0.firebaseapp.com
 - 1 day forecast from https://developer.accuweather.com/accuweather-forecast-api/apis
 
 ## Implementation Caveats
+- The API keys are hard-coded in config.ts. Since there doesn't seem to be a way in accuweather to limit the keys to certain domains, In a true system, there would be a wrapper back-end API, where the API keys would be, so that they're not exposed to the front-end
 - The accuweather API only gives suggestions for cities, for example, Houston. Typing in Houston, TX does not return any results
 - The accuweather autocomplete API does not return results for zip codes
 
