@@ -21,7 +21,7 @@ export function Weather() {
     const todaysForecast = useSelector(getTodaysForecast);
 
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root} data-testid="weather">
             <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                     Weather
@@ -29,19 +29,19 @@ export function Weather() {
                 <Typography color="textSecondary">
                     Current Temperature
                 </Typography>
-                <Typography variant="h5" component="h2">
+                <Typography variant="h5" component="h2" data-testid="current">
                     {currentTemperature}
                 </Typography>
                 <Typography color="textSecondary">
                     Today's High
                 </Typography>
-                <Typography variant="h5" component="h2">
+                <Typography variant="h5" component="h2" data-testid="high">
                     {todaysForecast.high}
                 </Typography>
                 <Typography color="textSecondary">
                     Today's Low
                 </Typography>
-                <Typography variant="h5" component="h2">
+                <Typography variant="h5" component="h2" data-testid="low">
                     {todaysForecast.low}
                 </Typography>
             </CardContent>

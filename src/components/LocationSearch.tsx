@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import debounce from 'lodash-es/debounce';
+import debounce from 'lodash/debounce';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getLocationResults, fetchSearchResults, setLocationKey, getLocationSearching } from '../slices/locationSlice';
@@ -29,7 +29,7 @@ export function LocationSearch() {
     const [open, setOpen] = useState(false);
 
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root} data-testid="location-search">
             <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                     Settings
