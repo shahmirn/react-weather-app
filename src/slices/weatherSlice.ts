@@ -5,9 +5,12 @@ import { AccuweatherForecast } from "../models/accuweather-forecast.model";
 
 import accuWeatherService from '../services/accuweather.service';
 
-interface WeatherState {
-    currentTemperatureLoading: boolean;
-    currentTemperature: string;
+export interface WeatherState {
+    currentConditionsLoading: boolean;
+    currentConditions: {
+        condition: string;
+        temperature: string;
+    },
     todaysForecastLoading: boolean;
     todaysForecast: {
         high: string;
@@ -16,8 +19,11 @@ interface WeatherState {
 }
 
 const initialState: WeatherState = {
-    currentTemperatureLoading: false,
-    currentTemperature: '',
+    currentConditionsLoading: false,
+    currentConditions: {
+        condition: '',
+        temperature: '',
+    },
     todaysForecastLoading: false,
     todaysForecast: {
         high: '',
@@ -29,16 +35,22 @@ export const weatherSlice = createSlice({
     name: 'weather',
     initialState,
     reducers: {
-        setCurrentTemperatureLoading: state => {
-            state.currentTemperatureLoading = true;
+        setCurrentConditionsLoading: state => {
+            state.currentConditionsLoading = true;
         },
-        setCurrentTemperature: (state, action: PayloadAction<AccuweatherCurrentCondition[]>) => {
-            state.currentTemperature = `${action.payload[0].Temperature.Imperial.Value} F`;
-            state.currentTemperatureLoading = false;
+        setCurrentConditions: (state, action: PayloadAction<AccuweatherCurrentCondition[]>) => {
+            state.currentConditions = {
+                condition: action.payload[0].WeatherText,
+                temperature: `${action.payload[0].Temperature.Imperial.Value} F`
+            };
+            state.currentConditionsLoading = false;
         },
-        clearCurrentTemperatore: state => {
-            state.currentTemperature = '';
-            state.currentTemperatureLoading = false;
+        clearCurrentConditions: state => {
+            state.currentConditions = {
+                condition: '',
+                temperature: ''
+            };
+            state.currentConditionsLoading = false;
         },
         setTodaysForecastLoading: state => {
             state.todaysForecastLoading = true;
@@ -60,17 +72,17 @@ export const weatherSlice = createSlice({
     }
 });
 
-export const { setCurrentTemperatureLoading, setCurrentTemperature, clearCurrentTemperatore, setTodaysForecastLoading, setTodaysForecast, clearTodaysForecast } = weatherSlice.actions;
+export const { setCurrentConditionsLoading, setCurrentConditions, clearCurrentConditions, setTodaysForecastLoading, setTodaysForecast, clearTodaysForecast } = weatherSlice.actions;
 
 export const fetchCurrentConditions = (locationKey: string): AppThunk => dispatch => {
-    dispatch(setCurrentTemperatureLoading());
+    dispatch(setCurrentConditionsLoading());
 
     if (locationKey) {
     accuWeatherService.getCurrentConditions(locationKey, response => {
-        dispatch(setCurrentTemperature(response));
+        dispatch(setCurrentConditions(response));
     });
     } else {
-        dispatch(clearCurrentTemperatore());
+        dispatch(clearCurrentConditions());
     }
 };
 
@@ -86,7 +98,7 @@ export const fetch1DayForecast = (locationKey: string): AppThunk => dispatch => 
     }
 };
 
-export const getCurrentTemperature = (state: RootState) => state.weather.currentTemperature;
+export const getCurrentConditions = (state: RootState) => state.weather.currentConditions;
 export const getTodaysForecast = (state: RootState) => state.weather.todaysForecast;
 
 export default weatherSlice.reducer;

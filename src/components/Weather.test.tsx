@@ -4,22 +4,27 @@ import { Weather } from './Weather';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-import weatherReducer from '../slices/weatherSlice';
+import weatherReducer, { WeatherState } from '../slices/weatherSlice';
 import { combineReducers } from '@reduxjs/toolkit';
 
 test('should display the weather', () => {
 
-    const initialState = {
-        weather: {
-            currentTemperatureLoading: false,
-            currentTemperature: '200 K',
-            todaysForecastLoading: false,
-            todaysForecast: {
-                high: '300 K',
-                low: '-100 K'
-            }
+    const weatherState: WeatherState = {
+        currentConditionsLoading: false,
+        currentConditions: {
+            condition: 'Really blazing hot',
+            temperature: '200 K',
+        },
+        todaysForecastLoading: false,
+        todaysForecast: {
+            high: '300 K',
+            low: '-100 K'
         }
-    }
+    };
+
+    const initialState = {
+        weather: weatherState
+    };
 
     const store = createStore(combineReducers({ weather: weatherReducer }), initialState);
 
@@ -29,13 +34,18 @@ test('should display the weather', () => {
         </Provider>
     );
 
-    const current = getByTestId(/current/);
+    const currentCondition = getByTestId(/current-condition/);
+    const currentTemperature = getByTestId(/current-temperature/);
     const high = getByTestId(/high/);
     const low = getByTestId(/low/);
 
-    expect(current).toBeInTheDocument();
+    expect(currentCondition).toBeInTheDocument();
+    expect(currentTemperature).toBeInTheDocument();
+    expect(high).toBeInTheDocument();
+    expect(low).toBeInTheDocument();
 
-    expect(getByText(current, /200 K/)).toBeTruthy();
+    expect(getByText(currentCondition, /Really blazing hot/)).toBeTruthy();
+    expect(getByText(currentTemperature, /200 K/)).toBeTruthy();
     expect(getByText(high, /300 K/)).toBeTruthy();
     expect(getByText(low, /-100 K/)).toBeTruthy();
 });

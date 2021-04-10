@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import React from 'react';
 
 import { useSelector } from 'react-redux';
-import { getCurrentTemperature, getTodaysForecast } from '../slices/weatherSlice';
+import { getCurrentConditions, getTodaysForecast } from '../slices/weatherSlice';
 
 const useStyles = makeStyles({
     root: {
@@ -17,7 +17,7 @@ export function Weather() {
 
     const classes = useStyles();
 
-    const currentTemperature = useSelector(getCurrentTemperature);
+    const currentConditions = useSelector(getCurrentConditions);
     const todaysForecast = useSelector(getTodaysForecast);
 
     return (
@@ -27,10 +27,16 @@ export function Weather() {
                     Weather
                 </Typography>
                 <Typography color="textSecondary">
+                    Current Condition
+                </Typography>
+                <Typography variant="h5" component="h2" data-testid="current-condition">
+                    {currentConditions.condition}
+                </Typography>
+                <Typography color="textSecondary">
                     Current Temperature
                 </Typography>
-                <Typography variant="h5" component="h2" data-testid="current">
-                    {currentTemperature}
+                <Typography variant="h5" component="h2" data-testid="current-temperature">
+                    {currentConditions.temperature}
                 </Typography>
                 <Typography color="textSecondary">
                     Today's High
