@@ -3,7 +3,7 @@ import { AccuweatherCurrentCondition } from '../models/accuweather-current-condi
 import { AccuweatherForecast } from '../models/accuweather-forecast.model';
 import { AccuweatherLocation } from '../models/accuweather-location.model';
 
-const baseUrl = 'http://dataservice.accuweather.com';
+const baseUrl = 'https://dataservice.accuweather.com';
 
 const api = {
 
